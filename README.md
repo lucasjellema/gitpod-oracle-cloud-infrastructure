@@ -6,6 +6,7 @@ Once the workspace is up and running, the following components will have been in
 * OCI CLI 
 * Terraform with the OCI Provider for Terraform
 * Fn Client and Fn Server (for serverless functions - locally and on OCI)
+* Kubectl - not yet configured for any specific Kubernetes cluster
 * VS Code extension Oracle DevTools
 
 Before you can actually start working with Oracle Cloud Infrastructure, a little configuration is required.
@@ -16,4 +17,19 @@ The files *config* and *oci_api_key.pem* in directory *.oci* need to contain pro
 mkdir ~/.oci
 cp .oci/config  ~/.oci
 cp .oci/oci_api_key.pem  ~/.oci
+# check both files are located where they should be
+ls -l  ~/.oci
 ```
+
+Time for a first OCI CLI command: 
+
+```
+oci os ns get 
+```
+
+Hardly inspiring  but a good check to verify the connection details. Another one:
+
+```
+oci iam compartment list
+```
+
