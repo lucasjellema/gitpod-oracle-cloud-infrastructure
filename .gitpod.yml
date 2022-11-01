@@ -2,7 +2,7 @@ tasks:
   - init: |
       gp open .oci/config
       gp open .oci/oci_api_key.pem
-      gp open .oci/config
+      gp open README.md
       curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
       chmod +777 install-oci-cli.sh
       ./install-oci-cli.sh --accept-all-defaults
