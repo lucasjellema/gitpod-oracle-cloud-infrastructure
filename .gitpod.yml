@@ -5,9 +5,9 @@ tasks:
       ./install-oci-cli.sh --accept-all-defaults
       export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
       # add this line to ~/.profile - to make oci a recognized shell command
-      echo 'oci() { /root/bin/oci "$@"; }' >> ~/.profile
+      echo 'oci() { ~/bin/oci "$@"; }' >> ~/.profile
       # reload ~/.profile
-      . /root/.profile
+      . ~/.profile
       # now oci is recognized as a command
       ## install Fn Client
       curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
