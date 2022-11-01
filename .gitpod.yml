@@ -1,0 +1,28 @@
+tasks:
+  - init: |
+      curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh > install-oci-cli.sh
+      chmod +777 install-oci-cli.sh
+      ./install-oci-cli.sh --accept-all-defaults
+      export OCI_CLI_SUPPRESS_FILE_PERMISSIONS_WARNING=True
+      # add this line to ~/.profile - to make oci a recognized shell command
+      echo 'oci() { /root/bin/oci "$@"; }' >> ~/.profile
+      # reload ~/.profile
+      . /root/.profile
+      # now oci is recognized as a command
+      ## install Fn Client
+      curl -LSs https://raw.githubusercontent.com/fnproject/cli/master/install | sh
+      ## install Fn server
+      docker pull fnproject/fnserver:latest
+      docker pull fnproject/node:latest      
+      sleep 10s &&       
+      gp sync-done Fn installed
+  - name: Run Fn Server
+    init: gp sync-await database-running
+    command: |
+      fn start &
+
+
+
+vscode:
+  extensions:
+    - Oracle.oracledevtools
