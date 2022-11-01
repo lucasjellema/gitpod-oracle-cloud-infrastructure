@@ -1,6 +1,8 @@
 # gitpod-oracle-cloud-infrastructure
 Gitpod workspace for working with Oracle Cloud Infrastructure - including CLI, Fn, Terraform, VS Oracle DevTools
 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/lucasjellema/gitpod-oracle-cloud-infrastructure)
+
 Once the workspace is up and running, the following components will have been installed:
 
 * OCI CLI 
