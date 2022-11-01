@@ -33,9 +33,9 @@ tasks:
       sudo apt-get update
       sudo apt-get install -y kubectl
       sleep 10s &&       
-      gp sync-done Fn installed
+      gp sync-done fn-server-installed
   - name: Run Fn Server
-    init: gp sync-await database-running
+    init: gp sync-await fn-server-installed
     command: |
       fn start &
 
