@@ -11,6 +11,8 @@ Once the workspace is up and running, the following components will have been in
 * Kubectl - not yet configured for any specific Kubernetes cluster
 * VS Code extension Oracle DevTools
 
+![](images/workspace-tools-oci.png)  
+
 Before you can actually start working with Oracle Cloud Infrastructure, a little configuration is required.
 
 The files *config* and *oci_api_key.pem* in directory *.oci* need to contain proper connection details for your OCI account. Please edit both files, provide the correct information. Then these two files config and oci_api_key.pem need to be copied to directory *~/.oci*. Please execute these commands in the terminal to perform that copy action:
