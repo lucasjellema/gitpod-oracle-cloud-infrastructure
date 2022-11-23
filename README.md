@@ -23,6 +23,9 @@ cp .oci/config  ~/.oci
 cp .oci/oci_api_key.pem  ~/.oci
 # check both files are located where they should be
 ls -l  ~/.oci
+# fix (warning about) too broad file permissions
+oci setup repair-file-permissions --file /home/gitpod/.oci/config
+oci setup repair-file-permissions --file /home/gitpod/.oci/oci_api_key.pem
 ```
 
 Time for a first OCI CLI command: 
