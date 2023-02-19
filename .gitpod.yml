@@ -35,6 +35,10 @@ tasks:
       sudo apt-get install -y kubectl
       sleep 10s &&       
       gp sync-done fn-server-installed
+  - name: Install Okit
+    init: |
+      docker build --tag okit --no-cache --force-rm https://github.com/oracle/oci-designer-toolkit.git
+      docker run -d --rm -p 80:80 --volume /workspace/gitpod-oracle-cloud-infrastructure/okit/user/templates:/okit/templates --volume /workspace/gitpod-oracle-cloud-infrastructure/.oci:/root/.oci --volume /workspace/gitpod-oracle-cloud-infrastructure/.ssh:/root/.ssh --name okit okit
   - name: Run Fn Server
     init: gp sync-await fn-server-installed
     command: |
