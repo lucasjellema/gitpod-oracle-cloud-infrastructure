@@ -76,7 +76,9 @@ sudo apt-get install grafana
 
 sudo grafana-cli plugins install oci-metrics-datasource
 # create a symbolic link at /usr/share/grafana/.oci/config to the OCI Config file (the Grafana plugin expects the OCI Config file at that location)
-ln -s /home/gitpod/.oci/config /usr/share/grafana/.oci/config
+sudo mkdir /usr/share/grafana/.oci
+sudo ln -s /home/gitpod/.oci/config /usr/share/grafana/.oci/config
+
 sudo service grafana-server start
 sudo service grafana-server status
 ```
@@ -85,12 +87,13 @@ sudo service grafana-server status
 
 ### Start using the OCI Grafana Plugin
 
-Now you can start using the OCI Data Source in Grafana. Open the Grafana Web Application at port 3000. On the login page, enter *admin* for username and password.
+Now you can start using the OCI Data Source in Grafana (provided the OCI Configuration and Private Key file have been configured correctly). Open the Grafana Web Application at port 3000. On the login page, enter *admin* for username and password.
 Click Log in. If login is successful, then you will see a prompt to change the password. 
 Click OK on the prompt, then change your password.
 
 To add a new Data Source of type OCI Metrics: in Grafana, on the Home Dashboard, click the gear icon on the left.
 Click Add data source.
+![](images/add-data-source.png)  
 In the Filter text box, type: oracle-oci-datasource
 In the filtered list, select oracle-oci-datasource.
 In the Settings page, fill in your Tenancy OCID, Default Region, and Environment. For Environment choose local.
