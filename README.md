@@ -75,14 +75,13 @@ sudo apt-get update
 sudo apt-get install grafana
 
 sudo grafana-cli plugins install oci-metrics-datasource
+# create a symbolic link at /usr/share/grafana/.oci/config to the OCI Config file (the Grafana plugin expects the OCI Config file at that location)
+ln -s /workspace/gitpod-oracle-cloud-infrastructure/.oci/config /usr/share/grafana/.oci/config
 sudo service grafana-server start
 sudo service grafana-server status
 ```
 
-After you have configured the .oci/config file, you need to copy the config file to the expected location under the grafana user (*/usr/share/grafana/.oci*) 
-```
-sudo cp -r /workspace/gitpod-oracle-cloud-infrastructure/.oci /usr/share/grafana
-```
+
 
 ### Start using the OCI Grafana Plugin
 
@@ -95,6 +94,10 @@ Click Add data source.
 In the Filter text box, type: oracle-oci-datasource
 In the filtered list, select oracle-oci-datasource.
 In the Settings page, fill in your Tenancy OCID, Default Region, and Environment. For Environment choose local.
+![](images/configure-grafana-plugin.png)  
+
+Click on Explore and compose query to evaluate metrics from OCI. For example this query that looks at data transfer through API Gateways over the last 50 days:
+![](images/grafana-exoloration-example.png)  
 
 To troubleshoot you can inspect the Grafana server log:
 
