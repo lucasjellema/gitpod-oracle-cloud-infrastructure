@@ -77,9 +77,9 @@ sudo service grafana-server start
 sudo service grafana-server status
 ```
 
-After you have configured the .oci/config file and the .oci/oci_api_key.pem file, you need to copy the config file to the expected location under the grafana user (*/usr/share/grafana/.oci*) 
+After you have configured the .oci/config file, you need to copy the config file to the expected location under the grafana user (*/usr/share/grafana/.oci*) 
 ```
-sudo cp -r /workspace/gitpod-oracle-cloud-infrastructure/.oci/config  /usr/share/grafana/.oci
+sudo cp -r /workspace/gitpod-oracle-cloud-infrastructure/.oci /usr/share/grafana
 ```
 
 ### Start using the OCI Grafana Plugin
