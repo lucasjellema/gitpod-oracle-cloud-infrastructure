@@ -53,3 +53,58 @@ docker run -d --rm -p 80:80 --volume /workspace/gitpod-oracle-cloud-infrastructu
 Then open the OKIT GUI at port 80.
 
 See user guide for OKIT at [OKIT User Guide](https://github.com/oracle/oci-designer-toolkit/blob/master/documentation/Usage.md) 
+
+## Run OCI Plugin for Grafana
+
+Grafana is an open-source visualization and alerting tool that you can use for analytics and monitoring of time-series data (metrics). While metrics from Oracle Cloud Infrastructure Monitoring are visible in metrics charts through the OCI Console, you can use Oracle Cloud Infrastructure Data Source for Grafana ("the Grafana Plug-in") to view metrics from resources across providers on a single Grafana dashboard.
+
+Docmentation on this plugin can be found here [OCI Grafana Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/grafana.htm) and in the [plugin's GitHub repository](https://github.com/oracle/oci-grafana-metrics) 
+
+The steps to install the plugin (automatically executed when the workspace was created) are described below. After this series of automated steps, you need to also perform a manual action.
+
+```
+sudo apt-get install -y apt-transport-https
+sudo apt-get install -y software-properties-common wget
+wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+
+echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+
+sudo apt-get update
+sudo apt-get install grafana
+
+sudo grafana-cli plugins install oci-metrics-datasource
+sudo service grafana-server start
+sudo service grafana-server status
+```
+
+After you have configured the .oci/config file and the .oci/oci_api_key.pem file, you need to copy the config file to the expected location under the grafana user (*/usr/share/grafana/.oci*) 
+```
+sudo cp -r /workspace/gitpod-oracle-cloud-infrastructure/.oci/config  /usr/share/grafana/.oci
+```
+
+### Start using the OCI Grafana Plugin
+
+Now you can start using the OCI Data Source in Grafana. Open the Grafana Web Application at port 3000. On the login page, enter *admin* for username and password.
+Click Log in. If login is successful, then you will see a prompt to change the password. 
+Click OK on the prompt, then change your password.
+
+To add a new Data Source of type OCI Metrics: in Grafana, on the Home Dashboard, click the gear icon on the left.
+Click Add data source.
+In the Filter text box, type: oracle-oci-datasource
+In the filtered list, select oracle-oci-datasource.
+In the Settings page, fill in your Tenancy OCID, Default Region, and Environment. For Environment choose local.
+
+To troubleshoot you can inspect the Grafana server log:
+
+```
+sudo cat /var/log/grafana/grafana.log
+```
+
+### Resources
+
+
+https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/grafana.htm
+https://github.com/oracle/oci-grafana-metrics
+https://grafana.com/grafana/plugins/oci-metrics-datasource
+
+https://grafana.com/docs/grafana/v8.4/installation/debian/

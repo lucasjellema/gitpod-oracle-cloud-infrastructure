@@ -39,6 +39,17 @@ tasks:
     init: |
       docker build --tag okit --no-cache --force-rm https://github.com/oracle/oci-designer-toolkit.git
       docker run -d --rm -p 80:80 --volume /workspace/gitpod-oracle-cloud-infrastructure/okit/user/templates:/okit/templates --volume /workspace/gitpod-oracle-cloud-infrastructure/.oci:/root/.oci --volume /workspace/gitpod-oracle-cloud-infrastructure/.ssh:/root/.ssh --name okit okit
+  - name: Install Grafana with OCI plugin
+    init: |
+      sudo apt-get install -y apt-transport-https
+      sudo apt-get install -y software-properties-common wget
+      wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+      echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+      sudo apt-get update
+      sudo apt-get install grafana
+      sudo grafana-cli plugins install oci-metrics-datasource
+      sudo service grafana-server start
+      sudo service grafana-server status
   - name: Run Fn Server
     init: gp sync-await fn-server-installed
     command: |
