@@ -76,7 +76,7 @@ sudo apt-get install grafana
 
 sudo grafana-cli plugins install oci-metrics-datasource
 # create a symbolic link at /usr/share/grafana/.oci/config to the OCI Config file (the Grafana plugin expects the OCI Config file at that location)
-ln -s /workspace/gitpod-oracle-cloud-infrastructure/.oci/config /usr/share/grafana/.oci/config
+ln -s /home/gitpod/.oci/config /usr/share/grafana/.oci/config
 sudo service grafana-server start
 sudo service grafana-server status
 ```

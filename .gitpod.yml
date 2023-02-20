@@ -48,7 +48,7 @@ tasks:
       sudo apt-get update
       sudo apt-get install grafana
       sudo grafana-cli plugins install oci-metrics-datasource
-      ln -s /workspace/gitpod-oracle-cloud-infrastructure/.oci/config /usr/share/grafana/.oci/config
+      ln -s /home/gitpod/.oci/config /usr/share/grafana/.oci/config
       sudo service grafana-server start
       sudo service grafana-server status
   - name: Run Fn Server
