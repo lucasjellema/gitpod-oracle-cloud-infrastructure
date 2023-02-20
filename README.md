@@ -1,5 +1,5 @@
 # gitpod-oracle-cloud-infrastructure
-Gitpod workspace for working with Oracle Cloud Infrastructure - including CLI, Fn, Terraform, VS Oracle DevTools
+Gitpod workspace for working with Oracle Cloud Infrastructure - including CLI, Fn, Terraform, VS Oracle DevTools, OKIT, Grafana & OCI Plugin.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/lucasjellema/gitpod-oracle-cloud-infrastructure)
 
@@ -11,6 +11,8 @@ Once the workspace is up and running, the following components will have been in
 * Kubectl - not yet configured for any specific Kubernetes cluster
 * VS Code extension Oracle DevTools
 * OCI Desiger Tookit (OKIT) - a set of tools for enabling design, deploy and visualise OCI environments through a graphical web based interface (visualize an existing environment, create/draw a new or updated environment, generate Terraform definitions to provision designed resources, inspect BOM and cost estimates)
+* Grafana & OCI plugin for Grafana
+* (planned) Ansible Collections for OCI
 
 ![](images/workspace-tools-oci.png)  
 
