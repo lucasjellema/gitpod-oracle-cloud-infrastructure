@@ -13,7 +13,7 @@ Once the workspace is up and running, the following components will have been in
 * OCI Desiger Tookit (OKIT) - a set of tools for enabling design, deploy and visualise OCI environments through a graphical web based interface (visualize an existing environment, create/draw a new or updated environment, generate Terraform definitions to provision designed resources, inspect BOM and cost estimates)
 * Grafana & OCI plugin for Grafana
 * (planned) Ansible Collections for OCI
-* (planned) Steampipe with OCI Plugin
+* Steampipe with OCI Plugin
 
 ![](images/workspace-tools-oci.png)  
 
@@ -126,3 +126,24 @@ https://github.com/oracle/oci-grafana-metrics
 https://grafana.com/grafana/plugins/oci-metrics-datasource
 
 https://grafana.com/docs/grafana/v8.4/installation/debian/
+
+
+# Steampipe with OCI Plugin
+
+Example query:
+
+```
+steampipe query "select
+   display_name,
+   id,
+   lifecycle_state,
+   cidr_block,
+   freeform_tags
+ from
+   oci_core_vcn;"
+```
+
+### Resources
+
+Steampipe  [Documentation](https://steampipe.io/docs)
+Steampipe Documentation [for OCI Plugin](https://hub.steampipe.io/plugins/turbot/oci)

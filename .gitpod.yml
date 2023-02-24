@@ -55,7 +55,15 @@ tasks:
     init: gp sync-await fn-server-installed
     command: |
       fn start &
+  - name: Install Steampipe with OCI Plugin
+    init: |
+      sudo /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/turbot/steampipe/main/install.sh)"
+      steampipe -v
+      steampipe query "select name from steampipe_registry_plugin;"
+      steampipe plugin install oci
 
+    command: |
+      steampipe query "select name, id, compartment_id as parent_compartment from oci.oci_identity_compartment;"
 
 
 vscode:
