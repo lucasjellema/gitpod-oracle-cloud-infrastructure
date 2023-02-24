@@ -67,8 +67,11 @@ The steps to install the plugin (automatically executed when the workspace was c
 
 ```
 sudo cp -r /workspace/gitpod-oracle-cloud-infrastructure/.oci /usr/share/grafana
+sudo chmod g+r /home/gitpod/.oci/oci_api_key.pem 
 ```
-to copy the OCI Configuration file to the grafana user directory structure.
+to copy the OCI Configuration file to the grafana user directory structure and make the private key file accessible to user *grafana*.
+
+Note: this second statement will cause OCI CLI to write warnings about "too broad file permissions" on a sensitive file. To suppress these warnings, you can execute `export OCI_CLI_NO_WARN=true` in the terminal window or - to apply this setting across all terminal sessions - add this line to your shell configuration file (e.g., ~/.bashrc or ~/.zshrc). 
 
 ### These actions are performed automatically on Workspace startup
 

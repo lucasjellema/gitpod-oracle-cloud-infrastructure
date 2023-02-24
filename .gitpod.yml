@@ -48,6 +48,7 @@ tasks:
       sudo apt-get update
       sudo apt-get install grafana
       sudo grafana-cli plugins install oci-metrics-datasource
+      sudo usermod -a -G gitpod  grafana
       sudo service grafana-server start
       sudo service grafana-server status
   - name: Run Fn Server
