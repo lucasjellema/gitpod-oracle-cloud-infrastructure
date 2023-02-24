@@ -13,6 +13,7 @@ Once the workspace is up and running, the following components will have been in
 * OCI Desiger Tookit (OKIT) - a set of tools for enabling design, deploy and visualise OCI environments through a graphical web based interface (visualize an existing environment, create/draw a new or updated environment, generate Terraform definitions to provision designed resources, inspect BOM and cost estimates)
 * Grafana & OCI plugin for Grafana
 * (planned) Ansible Collections for OCI
+* (planned) Steampipe with OCI Plugin
 
 ![](images/workspace-tools-oci.png)  
 
@@ -49,7 +50,7 @@ OKIT is started up with the Workspace, before the OCI config file and private ke
 
 ```
 docker stop okit
-docker run -d --rm -p 80:80 --volume /workspace/gitpod-oracle-cloud-infrastructure/okit/user/templates:/okit/templates --volume /workspace/gitpod-oracle-cloud-infrastructure/.oci:/root/.oci --volume /workspace/gitpod-oracle-cloud-infrastructure/.ssh:/root/.ssh --name okit okit
+docker run -d --rm -p 80:80 --volume /workspace/gitpod-oracle-cloud-infrastructure/okit/user/templates:/okit/templates --volume /workspace/gitpod-oracle-cloud-infrastructure/.oci:/home/gitpod/.oci --volume /workspace/gitpod-oracle-cloud-infrastructure/.ssh:/root/.ssh --name okit okit
 ```
 
 Then open the OKIT GUI at port 80.
@@ -62,7 +63,14 @@ Grafana is an open-source visualization and alerting tool that you can use for a
 
 Docmentation on this plugin can be found here [OCI Grafana Plugin](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/grafana.htm) and in the [plugin's GitHub repository](https://github.com/oracle/oci-grafana-metrics) 
 
-The steps to install the plugin (automatically executed when the workspace was created) are described below. After this series of automated steps, you need to also perform a manual action.
+The steps to install the plugin (automatically executed when the workspace was created) are described below. After this series of automated steps, you need to also perform a manual action - after you have configured the .oci/config file:
+
+```
+sudo cp -r /workspace/gitpod-oracle-cloud-infrastructure/.oci /usr/share/grafana
+```
+to copy the OCI Configuration file to the grafana user directory structure.
+
+### These actions are performed automatically on Workspace startup
 
 ```
 sudo apt-get install -y apt-transport-https
@@ -75,9 +83,6 @@ sudo apt-get update
 sudo apt-get install grafana
 
 sudo grafana-cli plugins install oci-metrics-datasource
-# create a symbolic link at /usr/share/grafana/.oci/config to the OCI Config file (the Grafana plugin expects the OCI Config file at that location)
-sudo mkdir /usr/share/grafana/.oci
-sudo ln -s /home/gitpod/.oci/config /usr/share/grafana/.oci/config
 
 sudo service grafana-server start
 sudo service grafana-server status
@@ -88,6 +93,7 @@ sudo service grafana-server status
 ### Start using the OCI Grafana Plugin
 
 Now you can start using the OCI Data Source in Grafana (provided the OCI Configuration and Private Key file have been configured correctly). Open the Grafana Web Application at port 3000. On the login page, enter *admin* for username and password.
+
 Click Log in. If login is successful, then you will see a prompt to change the password. 
 Click OK on the prompt, then change your password.
 
