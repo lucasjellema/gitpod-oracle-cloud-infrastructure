@@ -147,3 +147,32 @@ steampipe query "select
 
 Steampipe  [Documentation](https://steampipe.io/docs)
 Steampipe Documentation [for OCI Plugin](https://hub.steampipe.io/plugins/turbot/oci)
+
+
+# Apache SuperSet
+
+git clone https://github.com/apache/superset.git
+cd superset
+docker-compose -f docker-compose-non-dev.yml pull
+docker-compose -f docker-compose-non-dev.yml up
+
+Port 8088
+
+
+Log in with the default username and password: admin/admin
+Under settings , add Database Connection 
+
+settings
+Host: 172.18.0.1
+Port: 9193
+database name: steampipe
+user: steampipe
+password: check in terminal window where steampipe was installed (or run: `steampipe service status --show-password `)
+Display Name: anything you like, for example Steampipe
+
+Press Connect
+
+You can start creating SuperSet data sets based on OCI data through the Tables in the Steampipe database schema 
+
+
+https://superset.apache.org/

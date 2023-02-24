@@ -63,9 +63,25 @@ tasks:
       steampipe plugin install oci
 
     command: |
-      steampipe query "select name, id, compartment_id as parent_compartment from oci.oci_identity_compartment;"
+      steampipe service start --show-password 
+  - name: Install Apache SuperSet
+    init: |
+      git clone https://github.com/apache/superset.git
+      cd superset
+      docker-compose -f docker-compose-non-dev.yml pull
+      docker-compose -f docker-compose-non-dev.yml up      
+      
+ports:
+  # Apache SuperSet
+  - port: 8088
+  # Steampipe/ PostgreSQL
+  - port: 9193
+  # Grafana
+  - port: 3000
+  # OKIT
+  - port: 80
 
-
+    
 vscode:
   extensions:
     - Oracle.oracledevtools
