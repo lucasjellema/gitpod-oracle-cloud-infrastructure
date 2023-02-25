@@ -14,6 +14,7 @@ Once the workspace is up and running, the following components will have been in
 * Grafana & OCI plugin for Grafana
 * (planned) Ansible Collections for OCI
 * Steampipe with OCI Plugin
+* Apache Superset - open source data exploration and visualization platform
 
 ![](images/workspace-tools-oci.png)  
 
